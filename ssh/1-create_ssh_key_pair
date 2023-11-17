@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
-# Prompt the user to enter the passphrase
-read -s -p "Enter passphrase for the key: " passphrase
+# Name of private key 
+filename_key="school"
+
+# Number of bit
+bit_num="4096"
+
+# name of passphase
+passphase="betty"
 
 # Create the RSA key pair with 4096 bits and protect it with the passphrase
-ssh-keygen -t rsa -b 4096 -f ~/.ssh/school -N "$passphrase"
+ssh-keygen -t rsa -b $bit_num -f $filename_key -N "$passphrase"
 
+# Display success message 
 echo "RSA key pair created successfully."
