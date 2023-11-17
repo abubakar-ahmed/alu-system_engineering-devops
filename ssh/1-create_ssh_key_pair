@@ -6,7 +6,7 @@ filename_key="school"
 bit_num="4096"
 
 # name of passphase
-passphase="betty"
+passphrase="betty"
 
 # Create the RSA key pair with 4096 bits and protect it with the passphrase
 ssh-keygen -t rsa -b $bit_num -f $filename_key -N "$passphrase"
