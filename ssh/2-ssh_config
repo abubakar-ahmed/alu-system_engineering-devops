@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Autenticate without passphrase
+User ubuntu
+IdentityFile ~/.ssh/school
+PreferredAuthentications publickey
+PasswordAuthentication no
