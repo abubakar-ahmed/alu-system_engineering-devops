@@ -12,6 +12,6 @@ username="$3"
 ssh_key="$4"
 
 #transfer the data
-scp -o "StrictHostKeyChecking=no" -i "ssh_key" "$file" "$username"@"$host":~
+scp -o "StrictHostKeyChecking=no" -i "$ssh_key" "$file" "$username"@"$host":~
 
 exit 0
