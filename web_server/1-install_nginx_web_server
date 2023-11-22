@@ -1,4 +1,5 @@
-sh script to install nginx web server & make the following configurations:
+#!/usr/bin/env bash
+# bash script to install nginx web server & make the following configurations:
 
 apt-get update
 apt-get install -y nginx
