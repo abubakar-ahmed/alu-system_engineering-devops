@@ -1,34 +1,20 @@
 #!/usr/bin/env bash
-# bash script to install nginx web server & make the following configurations:
-
+# Update package list and install Nginx
 apt-get update
 apt-get install -y nginx
 
-# Configure Nginx to serve content with "Holberton School" at the root
-echo 'server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
-
-    location / {
-        return 200 "Holberton School for the win!\n";
-    }
-}' > /etc/nginx/sites-available/default
-
-# Start Nginx (no systemctl usage)
-/usr/sbin/nginx
-
-# Redirect Nginx logs to /var/log/nginx/error.log
-ln -sf /dev/stdout /var/log/nginx/error.log
-
-# Ensure Nginx is listening on port 80
-netstat -tnl | grep ':80 ' | grep -q 'LISTEN'
+# Verify Nginx is listening on port 80
+nc -zv localhost 80 > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "Nginx is listening on port 80"
+    echo "Nginx is installed and accepting traffic on port 80"
 else
     echo "Nginx is not listening on port 80"
 fi
+
+# Configure Nginx to return "Holberton School" at the root
+echo 'Holberton School for the win!' > /var/www/html/index.html
+
+# Restart Nginx
+/etc/init.d/nginx restart
 
 exit 0
