@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
-# Bash script that configures a new Ubuntu machine nginx
+# bash script to install nginx web server & make the following configurations:
 
 sudo apt-get update
-sudo apt-get install -y nginx
+sudo apt-get -y install nginx
 
-echo "Holberton School" | sudo tee /var/www/html/index.html
+# Create a custom HTML page with the content "Holberton School"
+echo "Holberton School" | sudo tee /var/www/html/index.html > /dev/null
 
-sudo nginx -t
-sudo service nginx start
+# Configure Nginx to listen on port 80
+sudo sed -i 's/80 default_server/80 default_server ipv6only=on/' /etc/nginx/sites-available/default
+
+# Restart Nginx using service (systemctl not used)
+sudo service nginx restart
+
+# Wait for Nginx to restart (add a delay of 2 seconds)
+sleep 2
+
+# Check if Nginx returns the expected content
+curl -s http://localhost | grep "Holberton School"
