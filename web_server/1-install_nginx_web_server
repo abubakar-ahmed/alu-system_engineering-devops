@@ -1,20 +1,10 @@
 #!/usr/bin/env bash
-# Update package list and install Nginx
-apt-get update
-apt-get install -y nginx
+# Bash script that configures a new Ubuntu machine nginx
 
-# Verify Nginx is listening on port 80
-nc -zv localhost 80 > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "Nginx is installed and accepting traffic on port 80"
-else
-    echo "Nginx is not listening on port 80"
-fi
+sudo apt-get update
+sudo apt-get install -y nginx
 
-# Configure Nginx to return "Holberton School" at the root
-echo 'Holberton School for the win!' > /var/www/html/index.html
+echo "Holberton School" | sudo tee /var/www/html/index.html
 
-# Restart Nginx
-/etc/init.d/nginx restart
-
-exit 0
+sudo nginx -t
+sudo service nginx start
